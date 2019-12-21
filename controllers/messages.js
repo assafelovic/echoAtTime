@@ -8,6 +8,7 @@ module.exports = (app) => {
         validateParams(['time', 'message']),
         async (req, res) => {
             const { time, message } = req.body;
+            // consistent hashing can be applied here
             const id = shortid.generate();
             const response = await scheduleMessage({ time, message, id });
             res.send(response);
