@@ -48,5 +48,5 @@ npm i
 
 ## Run
 ```
-node app.js
+npm start
 ```
