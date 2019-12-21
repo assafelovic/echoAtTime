@@ -1,8 +1,8 @@
-#### Intro
+## Intro
 
 Write a simple application server (in Node) that prints a message at a given time in the future.
 
-#### Requirements
+## Requirements
 The server has only 1 API:
 `echoAtTime` - which receives two parameters, time and message, and writes that message to the server console at the given time.
 
@@ -12,7 +12,7 @@ You should also assume that there will be a cluster of more than one server runn
 
 In case the server was down when a message should have been printed, it should print it out when going back online.
 
-#### Usage
+## Usage
 Client sends post request with the params `message` (String) and `time` (UNIX epoch) to `/api/echoAtTime`
 ```
 POST /api/echoAtTime
@@ -36,12 +36,12 @@ and the server responds with the scheduled message status:
 }
 ```
 
-#### Install
+## Install
 ```
 npm i
 ```
 
-#### Run
+## Run
 ```
 node app.js
 ```
