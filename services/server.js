@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const taskManager = require('./echoTaskManager');
 const _ = require('lodash');
 
 const initServer = ({
@@ -91,6 +92,7 @@ const initServer = ({
                 next();
             });
         }
+        taskManager.init();
 
         server.listen(httpPort);
 
