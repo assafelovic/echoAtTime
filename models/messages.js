@@ -10,7 +10,7 @@ const remove = (messageObj) => {
 };
 
 const getNext = () => {
-    // Get all keys for current second
+    // Get all keys from past to 1 second from now
     return redisClient.zrangebyscoreAsync(collectionName, 0, Date.now() + 1000);
 };
 
