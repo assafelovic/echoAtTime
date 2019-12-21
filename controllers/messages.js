@@ -1,10 +1,16 @@
-const { scheduleEcho } = require('../services/scheduler');
+const { scheduleMessage } = require('../services/scheduler');
+const { validateParams } = require('../middlewares/validateParams');
+const shortid = require('shortid');
 
 module.exports = (app) => {
     app.post(
-        '/schedule',
-        (req, res) => {
-            res.send(scheduleEcho(req));
+        '/api/echoAtTime',
+        validateParams(['time', 'message']),
+        async (req, res) => {
+            const { time, message } = req.body;
+            const id = shortid.generate();
+            const response = await scheduleMessage({ time, message, id });
+            res.send(response);
         }
     )
 };

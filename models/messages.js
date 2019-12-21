@@ -1,13 +1,12 @@
-const redisClient = require('./redis');
+const redisClient = require('../services/redis');
 const collectionName = 'messages';
 
-const add = (message) => {
-    return redisClient.zaddAsync(collectionName, message.time, JSON.stringify(message));
+const add = (messageObj) => {
+    return redisClient.zaddAsync(collectionName, messageObj.time, JSON.stringify(messageObj));
 };
 
-const remove = async (message) => {
-    const result = await redisClient.zrem(collectionName, JSON.stringify(message));
-    return { msg: message, ok: result };
+const remove = (messageObj) => {
+    return redisClient.zrem(collectionName, JSON.stringify(messageObj));
 };
 
 const getNext = async () => {
