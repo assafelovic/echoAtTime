@@ -35,6 +35,11 @@ and the server responds with the scheduled message status:
     "scheduledAt": "2019-12-21T12:52:33.655Z"
 }
 ```
+At the time of scheduled messages, the server will log accordingly to console. 
+For example:
+```
+Message: 'Hello World', Echoed at: Sat Dec 21 2019 14:52:33 GMT+0200 (IST)
+```
 
 ## Install
 ```
