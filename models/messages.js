@@ -6,13 +6,12 @@ const add = (messageObj) => {
 };
 
 const remove = (messageObj) => {
-    return redisClient.zrem(collectionName, JSON.stringify(messageObj));
+    return redisClient.zremAsync(collectionName, JSON.stringify(messageObj));
 };
 
-const getNext = async () => {
-    let messages = await redisClient.zrangeAsync(collectionName, 0, 0);
-    const nextMessage = messages.pop();
-    return nextMessage ? JSON.parse(nextMessage) : null;
+const getNext = () => {
+    // Get all keys for current second
+    return redisClient.zrangebyscoreAsync(collectionName, 0, Date.now() + 1000);
 };
 
 module.exports = {

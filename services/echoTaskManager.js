@@ -1,6 +1,7 @@
 'use strict';
 const logger = require('../utils/logger')('Task Manager');
 const messagesModel = require('../models/messages');
+const _ = require('lodash');
 
 const echoToConsole = (messageObj) => {
     const date = new Date(parseInt(messageObj.time, 10));
@@ -8,19 +9,20 @@ const echoToConsole = (messageObj) => {
 };
 
 const echoMessages = async () => {
-    const nextMessageObj = await messagesModel.getNext();
-    if (!nextMessageObj) return;
-
+    const nextMessages = await messagesModel.getNext();
     const currentTime = Date.now();
-    const time = nextMessageObj.time;
-    // In case the server was down when a message should have been printed, it should print it out when going back online.
-    if (time <= currentTime) {
-        const isRemoved = await messagesModel.remove(nextMessageObj);
-        // This will validate locking between clusters. Only a successful removal will allow echoing.
-        if (isRemoved) {
-            echoToConsole(nextMessageObj);
+
+    _.forEach(nextMessages, async () => {
+        const nextMsg = nextMessages.pop();
+        const messageObj = nextMsg ? JSON.parse(nextMsg) : null;
+        if (!messageObj) return;
+
+        if (messageObj.time <= currentTime) {
+            const isRemoved = await messagesModel.remove(messageObj);
+            // Validate locking between clusters. Only a successful removal will allow echoing.
+            if (isRemoved) echoToConsole(messageObj);
         }
-    }
+    });
 };
 
 const init = () => {
