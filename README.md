@@ -13,7 +13,7 @@ You should also assume that there will be a cluster of more than one server runn
 In case the server was down when a message should have been printed, it should print it out when going back online.
 
 ## Usage
-Client sends post request with the params `message` (String) and `time` (UNIX epoch) to `/api/echoAtTime`
+Client sends post request with the params `message` (String) and `time` (epoch) to `/api/echoAtTime`
 ```
 POST /api/schedule-message
 {
