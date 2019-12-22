@@ -1,4 +1,4 @@
-const redisClient = require('../services/redis');
+const redisClient = require('../utils/redis');
 const collectionName = 'messages';
 
 const add = (messageObj) => {

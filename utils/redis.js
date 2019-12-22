@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('../../utils/logger')('Redis Service');
+const logger = require('./logger')('Redis Service');
 const bluebird = require('bluebird');
 let redis = require('redis');
 

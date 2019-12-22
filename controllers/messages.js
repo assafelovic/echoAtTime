@@ -4,7 +4,7 @@ const shortid = require('shortid');
 
 module.exports = (app) => {
     app.post(
-        '/api/echoAtTime',
+        '/api/echo',
         validateParams(['time', 'message']),
         async (req, res) => {
             const { time, message } = req.body;
