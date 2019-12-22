@@ -62,6 +62,8 @@ const initServer = ({
                 },
                 timeToKillWorker
             );
+
+            taskManager.close();
         };
 
         // To support NON docker deployment

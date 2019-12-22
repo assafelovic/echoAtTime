@@ -1,7 +1,10 @@
 'use strict';
 const logger = require('../utils/logger')('Task Manager');
 const messagesModel = require('../models/messages');
+const bluebird = require('bluebird');
 const _ = require('lodash');
+
+let taskInterval;
 
 const echoToConsole = (messageObj) => {
     const date = new Date(parseInt(messageObj.time, 10));
@@ -12,10 +15,8 @@ const echoMessages = async () => {
     const nextMessages = await messagesModel.getNext();
     const currentTime = Date.now();
 
-    _.forEach(nextMessages, async () => {
-        const nextMsg = nextMessages.pop();
-        const messageObj = nextMsg ? JSON.parse(nextMsg) : null;
-        if (!messageObj) return;
+    bluebird.each(nextMessages, async (nextMsg) => {
+        const messageObj = JSON.parse(nextMsg);
 
         if (messageObj.time <= currentTime) {
             const isRemoved = await messagesModel.remove(messageObj);
@@ -27,9 +28,15 @@ const echoMessages = async () => {
 
 const init = () => {
     logger.info(`Started Echo Task Manager`);
-    setInterval(echoMessages, 1000);
+    taskInterval = setInterval(echoMessages, 1000);
+};
+
+const close = () => {
+    logger.info(`Stopping Echo Task Interval`);
+    clearInterval(taskInterval);
 };
 
 module.exports = {
-    init
+    init,
+    close
 };

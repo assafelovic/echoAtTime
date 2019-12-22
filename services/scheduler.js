@@ -3,7 +3,7 @@ const messagesModel = require('../models/messages');
 
 const scheduleMessage = async (messageObj) => {
     const result = await messagesModel.add(messageObj);
-    return { message: messageObj, status: result === 1, scheduledAt: new Date(messageObj.time) };
+    return { message: messageObj, success: !!result, scheduledAt: new Date(messageObj.time) };
 };
 
 module.exports = {
