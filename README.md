@@ -13,12 +13,12 @@ You should also assume that there will be a cluster of more than one server runn
 In case the server was down when a message should have been printed, it should print it out when going back online.
 
 ## Usage
-Client sends post request with the params `message` (String) and `time` (UNIX epoch) to `/api/echoAtTime`
+Client sends post request with the params `message` (String) and `time` (epoch) to `/api/echo`
 ```
-POST /api/echoAtTime
+POST /api/echo
 {
   time: 1576932753655,
-  Message: "Hello World"
+  message: "Hello World"
 }
 ```
 
@@ -31,7 +31,7 @@ and the server responds with the scheduled message status:
         "message": "Hello World",
         "id": "YZDMN8VV"
     },
-    "status": true,
+    "success": true,
     "scheduledAt": "2019-12-21T12:52:33.655Z"
 }
 ```
