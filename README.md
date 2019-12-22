@@ -31,7 +31,7 @@ and the server responds with the scheduled message status:
         "message": "Hello World",
         "id": "YZDMN8VV"
     },
-    "status": true,
+    "success": true,
     "scheduledAt": "2019-12-21T12:52:33.655Z"
 }
 ```
