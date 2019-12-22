@@ -1,5 +1,5 @@
 'use strict';
-
+// winston could be used here as well
 const log4js = require('log4js');
 
 log4js.configure({
