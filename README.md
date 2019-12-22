@@ -15,10 +15,10 @@ In case the server was down when a message should have been printed, it should p
 ## Usage
 Client sends post request with the params `message` (String) and `time` (UNIX epoch) to `/api/echoAtTime`
 ```
-POST /api/echoAtTime
+POST /api/schedule-message
 {
   time: 1576932753655,
-  Message: "Hello World"
+  message: "Hello World"
 }
 ```
 
